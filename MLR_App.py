@@ -16,7 +16,6 @@ from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 
 # Standard scaler for preprocessing
 from sklearn.preprocessing import StandardScaler
-from sympy import rotations
 
 
 st.header("Forecasting Solar Photovoltaics (PV) Power Generation Using Machine Learning")

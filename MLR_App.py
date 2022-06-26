@@ -5,18 +5,17 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import sklearn
 #import pickle
-import plotly.graph_objects as go
+#import plotly.graph_objects as go
 
-from datetime import datetime
-from datetime import timedelta
+#from datetime import datetime
+#from datetime import timedelta
 
 # Import regression and error metrics modules
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
+#from sklearn.linear_model import LinearRegression
+#from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 
 # Standard scaler for preprocessing
-from sklearn.preprocessing import StandardScaler
-
+#from sklearn.preprocessing import StandardScaler
 
 
 st.header("Forecasting Solar Photovoltaics (PV) Power Generation Using Machine Learning")
@@ -101,7 +100,7 @@ with st.sidebar:
 
 st.subheader('Observed and Forecasted Power Generation')
 
-st.write(fig)  
+#st.write(fig)  
 
 st.subheader('Model Performance Matrices')
 

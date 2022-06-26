@@ -17,8 +17,6 @@ from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 # Standard scaler for preprocessing
 from sklearn.preprocessing import StandardScaler
 
-# Load specific forecasting tools
-
 
 
 st.header("Forecasting Solar Photovoltaics (PV) Power Generation Using Machine Learning")
@@ -68,8 +66,8 @@ with st.sidebar:
 
 
 # Load data
-df_mlr = pd.read_csv('Data_Model.csv', index_col = 'Date', infer_datetime_format=True)
-st.write(df_mlr)
+#df_mlr = pd.read_csv('Data_Model.csv', index_col = 'Date', infer_datetime_format=True)
+#st.write(df_mlr)
 
 # creating categorical columns for linear regression 
 #cat_cols = ['Year', 'Month', 'Day', 'Hour','MeanWD','MaxGustWD']

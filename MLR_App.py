@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import sklearn
-import pickle
+#import pickle
 import plotly.graph_objects as go
 
 from datetime import datetime
@@ -72,11 +72,11 @@ df_mlr = pd.read_csv('Data_Model.csv', index_col = 'Date', infer_datetime_format
 st.write(df_mlr)
 
 # creating categorical columns for linear regression 
-cat_cols = ['Year', 'Month', 'Day', 'Hour','MeanWD','MaxGustWD']
-for col in cat_cols:
-    df_mlr[col] = df_mlr[col].astype('category')
+#cat_cols = ['Year', 'Month', 'Day', 'Hour','MeanWD','MaxGustWD']
+#for col in cat_cols:
+#    df_mlr[col] = df_mlr[col].astype('category')
 # Preparing dummy columns for use in sklearn's linear regression 
-df_mlr= pd.get_dummies(df_mlr, drop_first = True)
+#df_mlr= pd.get_dummies(df_mlr, drop_first = True)
 
 
 #cols_to_transform = ['MeanWS','MaxGustWS','Precipitation','GlobalSolarRadiation','TiltSolarIrradiance',

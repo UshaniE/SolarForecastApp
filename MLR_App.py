@@ -90,18 +90,18 @@ with open('MLR.pkl' , 'rb') as f:
 pred = lr.predict(X_test)
 
 # plot the predictions
-#fig,axes = plt.subplots(figsize = (15,7))
-#axes.plot(y_test.index, y_test, label='Observed')
-#axes.plot(y_test.index, pred, color='r', label='Forecast')
+fig,axes = plt.subplots(figsize = (15,7))
+axes.plot(y_test.index, y_test, label='Observed')
+axes.plot(y_test.index, pred, color='r', label='Forecast')
     
 # set labels, legends and show plot
-#axes.set_xlabel('Date')
-#axes.set_ylabel('Power Generation in kW')
-#axes.legend()  
+axes.set_xlabel('Date')
+axes.set_ylabel('Power Generation in kW')
+axes.legend()  
 
 st.subheader('Observed and Forecasted Power Generation')
 
-#st.write(fig)  
+st.write(fig)  
 
 st.subheader('Model Performance Matrices')
 

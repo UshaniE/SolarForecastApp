@@ -21,9 +21,8 @@ from sklearn.preprocessing import StandardScaler
 
 
 
-#st.title("FORECASTING SOLAR PHOTOVOLTAICS (PV) POWER GENERATION USING MACHINE LEARNING")
 st.header("Forecasting Solar Photovoltaics (PV) Power Generation Using Machine Learning")
-#st.write("Forecasting Horizon : **7-day ahead**")
+
 st.write("Model : **Multiple Linear Regression**")
 
 st.sidebar.image("Picture1.jpg", use_column_width=True)
@@ -93,15 +92,14 @@ with open('MLR.pkl' , 'rb') as f:
 pred = lr.predict(X_test)
 
 # plot the predictions
-fig,axes = plt.subplots(figsize = (15,7))
-axes.plot(y_test.index, y_test, label='Observed')
-
-axes.plot(y_test.index, pred, color='r', label='Forecast')
+#fig,axes = plt.subplots(figsize = (15,7))
+#axes.plot(y_test.index, y_test, label='Observed')
+#axes.plot(y_test.index, pred, color='r', label='Forecast')
     
 # set labels, legends and show plot
-axes.set_xlabel('Date')
-axes.set_ylabel('Power Generation in kW')
-axes.legend()  
+#axes.set_xlabel('Date')
+#axes.set_ylabel('Power Generation in kW')
+#axes.legend()  
 
 st.subheader('Observed and Forecasted Power Generation')
 

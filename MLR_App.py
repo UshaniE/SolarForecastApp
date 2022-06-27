@@ -35,14 +35,6 @@ with st.sidebar:
      st.write('Buruthakanda Solar Park, Sri Lanka')
      st.write('Hourly data from 2011-07-21 to 2013-12-31')
 
-#date = st.sidebar.selectbox(label = "Select a Date")
-# Enter start date
-#startdate = st.date_input(label = "Enter the start date for forecast",value=datetime(2013,9,1),
-# min_value=datetime(2013,8,22), max_value=datetime(2013,12,24))
-#st.write(start)
-
-#enddate = st.date_input(label = "Enter the end date for forecast",value=datetime(2013,9,10),
-# min_value=datetime(2013,9,1), max_value=datetime(2013,12,30))
 
 # Functions
 # Train test split  
@@ -94,7 +86,9 @@ with open('MLR.pkl' , 'rb') as f:
 
 st.subheader("Multiple Linear Regression")
 
-st.write('Observed and Forecasted Power Generation')
+#st.write("""##### Observed and Forecasted Power Generation""")
+
+st.markdown(f'<h1 style="color:#696969;font-size:22px;">{"Observed and Forecasted Power Generation"}</h1>', unsafe_allow_html=True)
 
 # plot the predictions for last 7 days of the test set
 y_actualsel = y_test.loc['2013-12-23':'2014-01-01']
@@ -115,7 +109,8 @@ axes.legend()
 
 st.write(fig)  
 
-st.write('Model Performance Matrices')
+#st.write('Model Performance Matrices')
+st.markdown(f'<h1 style="color:#696969;font-size:22px;">{"Model Performance Matrices"}</h1>', unsafe_allow_html=True)
 
 # Performance evaluation
 pred = lr.predict(X_test)

@@ -20,8 +20,6 @@ from sklearn.preprocessing import StandardScaler
 
 st.header("Forecasting Solar Photovoltaics (PV) Power Generation Using Machine Learning")
 
-st.write("Model : **Multiple Linear Regression**")
-
 st.sidebar.image("Picture1.jpg", use_column_width=True)
 
 with st.sidebar:
@@ -72,7 +70,6 @@ def train_test(data, test_size = 0.15, scale = False, cols_to_transform=None, in
     
     return X_train, X_test, y_train, y_test
 
-st.subheader('Observed and Forecasted Power Generation')
 
 # Load data
 df_mlr = pd.read_csv('Data_Model.csv', index_col = 'Date', infer_datetime_format=True)
@@ -95,6 +92,9 @@ X_train, X_test, y_train, y_test = train_test(df_mlr, test_size = 0.15, scale = 
 with open('MLR.pkl' , 'rb') as f:
     lr = pickle.load(f)
 
+st.subheader("Multiple Linear Regression")
+
+st.write('Observed and Forecasted Power Generation')
 
 # plot the predictions for last 7 days of the test set
 y_actualsel = y_test.loc['2013-12-23':'2014-01-01']
@@ -104,8 +104,8 @@ y_predsel = lr.predict(X_predsel)
 
 fig,axes = plt.subplots(figsize = (15,7))
 axes.plot(y_actualplot.index, y_actualplot, label='Observed')
-axes.plot(y_actualsel.index, y_predsel, color='r', label='Forecast')
-    
+axes.plot(y_actualsel.index, y_predsel, color='r',  label='Forecast:MLR')
+
 # set labels, legends and show plot
 axes.set_xlabel('Date')
 axes.set_ylabel('Power Generation in kW')
@@ -115,7 +115,7 @@ axes.legend()
 
 st.write(fig)  
 
-st.subheader('Model Performance Matrices')
+st.write('Model Performance Matrices')
 
 # Performance evaluation
 pred = lr.predict(X_test)
@@ -129,3 +129,127 @@ col1.metric('RMSE',RMSE)
 col2.metric('R2',R2)
 col3.metric('MAE',MAE)
 
+# load saved model
+with open('Ridge.pkl' , 'rb') as f:
+    rr = pickle.load(f)
+
+st.subheader("Ridge Linear Regression")
+
+st.write('Observed and Forecasted Power Generation')
+
+# plot the predictions for last 7 days of the test set
+y_predselrr = rr.predict(X_predsel)
+
+fig,axes = plt.subplots(figsize = (15,7))
+axes.plot(y_actualplot.index, y_actualplot, label='Observed')
+axes.plot(y_actualsel.index, y_predselrr, color='y',  label='Forecast:RR')
+
+# set labels, legends and show plot
+axes.set_xlabel('Date')
+axes.set_ylabel('Power Generation in kW')
+axes.set_xticks(np.arange(0, len(y_actualplot.index), 24))
+axes.tick_params(axis='x',labelrotation = 90)
+axes.legend()  
+
+st.write(fig)  
+
+st.write('Model Performance Matrices')
+
+# Performance evaluation
+pred = rr.predict(X_test)
+
+RMSE = round(np.sqrt(mean_squared_error(y_test, pred)),2)
+R2 = round(r2_score(y_test, pred),2)
+MAE = round(mean_absolute_error(y_test, pred),2)
+  
+col1,col2,col3 = st.columns(3)
+col1.metric('RMSE',RMSE)
+col2.metric('R2',R2)
+col3.metric('MAE',MAE)
+
+st.subheader("Elastic Net Linear Regression")
+
+st.write('Observed and Forecasted Power Generation')
+
+# Load data
+X_test_RF = pd.read_csv('X_test_lag_RF.csv', index_col = 'Date', infer_datetime_format=True)
+y_test_RF = pd.read_csv('y_test_lag_RF.csv', index_col = 'Date', infer_datetime_format=True)
+
+# load saved model
+with open('ElasticNetl.pkl' , 'rb') as f:
+    enr= pickle.load(f)
+
+# plot the predictions for last 7 days of the test set
+X_predselrfl = X_test_RF.loc['2013-12-23':'2014-01-01']
+y_predselenr = enr.predict(X_predselrfl)
+
+fig,axes = plt.subplots(figsize = (15,7))
+axes.plot(y_actualplot.index, y_actualplot, label='Observed')
+axes.plot(y_actualsel.index, y_predselenr, color='c',  label='Forecast:ENR')
+
+# set labels, legends and show plot
+axes.set_xlabel('Date')
+axes.set_ylabel('Power Generation in kW')
+axes.set_xticks(np.arange(0, len(y_actualplot.index), 24))
+axes.tick_params(axis='x',labelrotation = 90)
+axes.legend()  
+
+st.write(fig)  
+
+st.write('Model Performance Matrices')
+
+# Performance evaluation
+predenr = enr.predict(X_test_RF)
+
+RMSE_ENR = round(np.sqrt(mean_squared_error(y_test_RF, predenr)),2)
+R2_ENR = round(r2_score(y_test_RF, predenr),2)
+MAE_ENR = round(mean_absolute_error(y_test_RF, predenr),2)
+  
+col1,col2,col3 = st.columns(3)
+col1.metric('RMSE',RMSE_ENR)
+col2.metric('R2',R2_ENR)
+col3.metric('MAE',MAE_ENR)
+
+
+st.subheader("Random Forest")
+
+st.write('Observed and Forecasted Power Generation')
+
+# Load data
+X_test_RF = pd.read_csv('X_test_lag_RF.csv', index_col = 'Date', infer_datetime_format=True)
+y_test_RF = pd.read_csv('y_test_lag_RF.csv', index_col = 'Date', infer_datetime_format=True)
+
+# load saved model
+with open('rflag.pkl' , 'rb') as f:
+    rfl= pickle.load(f)
+
+# plot the predictions for last 7 days of the test set
+X_predselrfl = X_test_RF.loc['2013-12-23':'2014-01-01']
+y_predselrfl = rfl.predict(X_predselrfl)
+
+fig,axes = plt.subplots(figsize = (15,7))
+axes.plot(y_actualplot.index, y_actualplot, label='Observed')
+axes.plot(y_actualsel.index, y_predselrfl, color='g',  label='Forecast:RF')
+
+# set labels, legends and show plot
+axes.set_xlabel('Date')
+axes.set_ylabel('Power Generation in kW')
+axes.set_xticks(np.arange(0, len(y_actualplot.index), 24))
+axes.tick_params(axis='x',labelrotation = 90)
+axes.legend()  
+
+st.write(fig)  
+
+st.write('Model Performance Matrices')
+
+# Performance evaluation
+predrfl = rfl.predict(X_test_RF)
+
+RMSE_RF = round(np.sqrt(mean_squared_error(y_test_RF, predrfl)),2)
+R2_RF = round(r2_score(y_test_RF, predrfl),2)
+MAE_RF = round(mean_absolute_error(y_test_RF, predrfl),2)
+  
+col1,col2,col3 = st.columns(3)
+col1.metric('RMSE',RMSE_RF)
+col2.metric('R2',R2_RF)
+col3.metric('MAE',MAE_RF)

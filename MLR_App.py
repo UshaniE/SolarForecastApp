@@ -130,7 +130,7 @@ with open('Ridge.pkl' , 'rb') as f:
 
 st.subheader("Ridge Linear Regression")
 
-st.write('Observed and Forecasted Power Generation')
+st.markdown(f'<h1 style="color:#696969;font-size:22px;">{"Observed and Forecasted Power Generation"}</h1>', unsafe_allow_html=True)
 
 # plot the predictions for last 7 days of the test set
 y_predselrr = rr.predict(X_predsel)
@@ -148,7 +148,7 @@ axes.legend()
 
 st.write(fig)  
 
-st.write('Model Performance Matrices')
+st.markdown(f'<h1 style="color:#696969;font-size:22px;">{"Model Performance Matrices"}</h1>', unsafe_allow_html=True)
 
 # Performance evaluation
 pred = rr.predict(X_test)
@@ -164,7 +164,7 @@ col3.metric('MAE',MAE)
 
 st.subheader("Elastic Net Linear Regression")
 
-st.write('Observed and Forecasted Power Generation')
+st.markdown(f'<h1 style="color:#696969;font-size:22px;">{"Observed and Forecasted Power Generation"}</h1>', unsafe_allow_html=True)
 
 # Load data
 X_test_RF = pd.read_csv('X_test_lag_RF.csv', index_col = 'Date', infer_datetime_format=True)
@@ -191,7 +191,7 @@ axes.legend()
 
 st.write(fig)  
 
-st.write('Model Performance Matrices')
+st.markdown(f'<h1 style="color:#696969;font-size:22px;">{"Model Performance Matrices"}</h1>', unsafe_allow_html=True)
 
 # Performance evaluation
 predenr = enr.predict(X_test_RF)
@@ -208,7 +208,7 @@ col3.metric('MAE',MAE_ENR)
 
 st.subheader("Random Forest")
 
-st.write('Observed and Forecasted Power Generation')
+st.markdown(f'<h1 style="color:#696969;font-size:22px;">{"Observed and Forecasted Power Generation"}</h1>', unsafe_allow_html=True)
 
 # Load data
 X_test_RF = pd.read_csv('X_test_lag_RF.csv', index_col = 'Date', infer_datetime_format=True)
@@ -235,7 +235,7 @@ axes.legend()
 
 st.write(fig)  
 
-st.write('Model Performance Matrices')
+st.markdown(f'<h1 style="color:#696969;font-size:22px;">{"Model Performance Matrices"}</h1>', unsafe_allow_html=True)
 
 # Performance evaluation
 predrfl = rfl.predict(X_test_RF)
